@@ -1,0 +1,53 @@
+\section{Method}\label{sec:method}
+\subsection{Problem definition}
+Let $\mathcal{S}$ be a set of species and $T$ the target: BioCLIP's open-set classifier, which returns a distribution
+$p_T(\cdot\mid x)$ over the $\sim$450k species of TreeOfLife-10M. For an image $x$ of species $y$, let $E$ be an
+\emph{evaluation} oracle that returns the probability that $x$ shows $y$. An image is a \textbf{successful attack} if
+\[
+E(x, y) \ge \tau \quad\text{and}\quad \arg\max_{s} p_T(s\mid x) \ne y .
+\]
+We report the attack success rate $\mathrm{ASR}=P(\text{fooled}\mid\text{faithful})$, the effective ASR
+$P(\text{fooled}\wedge\text{faithful})$, and ASR@$r$, the rate at which even rank $r$ (genus, family, order) is wrong.
+
+\subsection{Generator and reward}
+The generator is Stable Diffusion 1.5~\citep{rombach2022ldm} with an optional LoRA~\citep{hu2022lora} on the attention
+projections of its U-Net. The reward of an image is
+\[
+r(x, y) = \bigl(1-p_T(y\mid x)\bigr)\cdot p_O(y\mid x),
+\]
+where the \emph{reward oracle} $O$ is BioCLIP-2 restricted to $\mathcal{S}$. The second factor prevents the trivial
+solution of drawing something that is not $y$. $O$ is never used for evaluation: $E$ is GPT-4o~\citep{openai2024gpt4o}, a model of another family, answering
+``Does this photo show a \emph{common name} (\emph{binomial})?''; $E(x,y)$ is $p(\text{yes})$ read from the
+log-probabilities of its first token, and it is validated against human annotations.
+
+\subsection{Context engineering}
+\textbf{Modifiers.} A prompt is ``a high quality nature photograph of a \emph{common} (\emph{binomial}),
+\emph{modifier}''. The 32 modifiers belong to six families, each a hypothesis about a shortcut: background, lighting,
+viewpoint, camera, style, and group-specific life stage (larva, chick, seedling, button stage).
+\textbf{Targeted prompts} steer towards a confusable species $y^*$: one of 21 curated look-alike pairs (mimicry,
+toxic look-alikes) or a nearest neighbour of $y$ among BioCLIP's text embeddings.
+\textbf{LLM attacker.} Following OPRO~\citep{yang2024opro}, an instruction-tuned LLM (GPT-4o-mini) proposes new
+modifiers given the previous ones and their mean reward. It never sees an image.
+
+\subsection{Editing real photos}
+For the three real datasets, a photo of $y$ is encoded by the VAE, noised up to a fraction $s$ of the diffusion chain
+and denoised with a modifier prompt (SDEdit). The strength $s$ trades fidelity (low $s$ keeps the organism) against
+freedom to change the context (high $s$).
+
+\subsection{Inference-time search with early rejection}
+Best-of-$N$ samples $N$ images per prompt and keeps the one with the highest reward. \emph{Early rejection} runs the
+$N$ chains for $k$ of the $T$ steps, decodes the DDIM prediction of the clean latent $\hat{x}_0$ with a tiny VAE,
+scores it, and finishes only the best $m$ candidates. The cost in U-Net evaluations drops from $NT$ to
+$Nk+m(T-k)$, i.e.\ to 55\% for $N{=}8$, $m{=}2$, $k{=}0.4T$. The method works if the reward of $\hat{x}_0$ at step
+$k$ ranks the candidates like the final reward; we measure this rank correlation.
+
+\subsection{Post-training}
+\textbf{RAFT.} We run best-of-8 on the training species (split A), keep for each species the 4 images that fool $T$
+and satisfy $p_O(y)\ge 0.5$, and fine-tune a rank-8 LoRA with the denoising loss.
+
+\textbf{DDPO with group-relative advantages.} With DDIM ($\eta=1$) each step samples
+$x_{t-1}\sim\mathcal{N}(\mu_\theta(x_t,t),\sigma_t^2 I)$, so $\log\pi_\theta(x_{t-1}\mid x_t)$ is differentiable.
+Each epoch samples $P{=}8$ prompts of split-A species and $G{=}4$ images per prompt, and normalises rewards within
+each group, $A_i=(r_i-\bar r)/\sigma_r$, as GRPO does. It then minimises the clipped surrogate
+$\max(-A\rho,\,-A\,\mathrm{clip}(\rho,1\pm\epsilon))$ with $\rho=\pi_\theta/\pi_{\text{old}}$ on half of the steps.
+Only the LoRA is trained. An ablation removes the fidelity factor from the reward.

@@ -1,0 +1,11 @@
+\section{Discussion and limitations}
+\textbf{Oracle bias.} Fidelity is judged by a VLM and by a small human study; both can miss subtle diagnostic
+features (wing venation, gill attachment). Our numbers are therefore an upper bound on true fidelity for difficult
+groups. \textbf{Generator capacity.} Stable Diffusion 1.5 cannot draw many species; the attackable set and the
+img2img attacks address this, but rare species remain under-represented. \textbf{Transfer to BioCLIP-2} is biased
+because it is our reward oracle. \textbf{Ethics.} Generated images must not reach citizen-science platforms; we
+release the attacks as a benchmark to make BioCLIP more robust, not as a tool to pollute biodiversity data.
+
+\section{Conclusion and future work}
+\todo{Two sentences of conclusion.} A natural next step is defence: fine-tuning BioCLIP on the faithful attacks
+found here, then measuring robustness and clean accuracy, and attacking newer flow-matching generators.

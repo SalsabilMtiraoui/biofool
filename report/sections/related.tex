@@ -1,0 +1,20 @@
+\section{Background and related work}
+\textbf{BioCLIP.} BioCLIP~\citep{stevens2024bioclip} is a CLIP ViT-B/16 trained contrastively on TreeOfLife-10M,
+10M images from 454k taxa, with text that mixes the full Linnaean taxonomy and common names. Its public demo
+classifies an image against the text embeddings of every species of TreeOfLife-10M. BioCLIP-2~\citep{gu2025bioclip2}
+scales the recipe to 214M images.
+
+\textbf{Adversarial examples beyond $\ell_p$ balls.} Generative models produce adversarial examples that are not
+small perturbations: unrestricted examples from GANs~\citep{song2018constructing}, naturally occurring hard examples
+(ImageNet-A, \citealp{hendrycks2021natural}), and diffusion-based attacks that edit images in latent space. We target a
+scientific model and require fidelity to be verified independently.
+
+\textbf{Aligning diffusion models with a reward.} DDPO~\citep{black2024ddpo} casts denoising as a multi-step
+decision process and optimises a reward with policy gradients; GRPO~\citep{shao2024deepseekmath} normalises rewards
+within a group of samples of the same prompt. RAFT~\citep{dong2023raft} fine-tunes on the best samples ranked by the
+reward. Optimising a learned reward invites reward hacking~\citep{skalse2022defining}.
+
+\textbf{Fast sampling.} DDIM~\citep{song2021ddim} and DPM-Solver++~\citep{lu2022dpmsolverpp} reduce the number of
+denoising steps; latent consistency models~\citep{luo2023lcmlora} sample in 2--4 steps; latent diffusion
+\citep{rombach2022ldm} moves the computation to a compressed latent space, and tiny decoders (TAESD) make decoding
+cheap. SDEdit~\citep{meng2022sdedit} edits a real image by noising it and denoising it with a new prompt.

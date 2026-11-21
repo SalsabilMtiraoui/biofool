@@ -1,0 +1,4 @@
+# Ablation: reward = fooling only, no fidelity term. Expected: reward hacking (non-animals, abstract images).
+base: ../default.yaml
+reward:
+  mode: fool_only

@@ -1,0 +1,10 @@
+BioCLIP is a vision--language foundation model that names organisms across the whole tree of life, and it is used
+to support biodiversity monitoring. We ask how robust it is to realistic images it has never seen. We build
+\emph{BioFool}, a generative application that produces faithful images of a given species that BioCLIP's public
+open-set classifier ($\sim$450k species) gets wrong. Fidelity is judged by GPT-4o, a model of another family, and
+by humans. We adapt Stable Diffusion in four ways: context engineering of the prompt (including an LLM attacker),
+editing of real photographs, inference-time search with a new \emph{early-rejection} scheme, and post-training of a
+LoRA with reinforcement learning (DDPO with group-relative advantages). We then accelerate sampling. On four datasets
+(synthetic images, iNaturalist photos, invasive species and BioCLIP's own Rare Species benchmark), \todo{headline
+result: e.g. DDPO raises the attack success rate from X\% to Y\% on unseen species; early rejection keeps Z\% of
+best-of-N's gain at 55\% of its cost}. Code: \url{\todo{repository URL}}.

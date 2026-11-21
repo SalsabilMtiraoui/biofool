@@ -1,0 +1,26 @@
+\section{Experimental setup}\label{sec:setup}
+\textbf{Datasets.}
+\texttt{synth80}: 80 species in four groups (insects, birds, plants, fungi), chosen to contain 21 look-alike pairs.
+56 species (split A) are used for training and selection; every reported number on \texttt{synth80} uses the 24
+held-out species (split B), restricted to the \emph{attackable set}: species whose clean generations are judged
+faithful and are correctly classified (this removes species that the generator cannot draw).
+\texttt{inat80}: 10 research-grade iNaturalist photos per species of the same 80 species.
+\texttt{invasive}: 8 photos of each of 40 invasive alien species of the EU Union list.
+\texttt{rare}: 4 photos of each of 100 species of BioCLIP's Rare Species benchmark, IUCN species held out of its
+training data. Photos are CC0/CC-BY/CC-BY-NC; sources are stored per image.
+
+\textbf{Models.} Target: BioCLIP open set (TreeOfLife-10M embeddings, as in the official demo). Transfer: BioCLIP
+closed set, BioCLIP-2 open set, OpenAI CLIP ViT-L/14~\citep{radford2021clip}, SigLIP SO400M~\citep{zhai2023siglip}.
+Closed-set classifiers average the 80 CLIP ImageNet templates. Reward oracle: BioCLIP-2. Evaluation oracle:
+GPT-4o (images at 512 px, detail ``low''; $\tau=0.5$).
+
+\textbf{Human study.} \todo{N} images stratified by method, shuffled and blind to the method, each annotated by
+\todo{3} members (``is this \emph{species}?'' yes/no/unsure). We report human fidelity per method and Cohen's
+$\kappa$ between annotators and with the VLM judge.
+
+\textbf{Statistics.} 95\% confidence intervals by cluster bootstrap over species (1000 resamples). Fixed seeds; all
+hyper-parameters are in \texttt{configs/default.yaml}.
+
+\textbf{Hyper-parameters.} 512$\times$512, DDIM 25 steps, guidance 7.5. Best-of-$N$: $N{=}8$, early rejection at
+$0.4T$ keeping 2. RAFT: rank 8, lr $10^{-4}$, 1500 steps. DDPO: rank 8, lr $3\cdot10^{-4}$, 20 sampling steps,
+\todo{30} epochs of $4\times4$ images, clip $10^{-4}$ (T4 profile). Hardware: NVIDIA T4 16\,GB (Google Colab), fp16.

@@ -1,0 +1,9 @@
+\section{Inference acceleration}\label{sec:accel}
+Generation dominates the cost of every stage (search, RL rollouts, evaluation). We measure seconds per image, peak
+memory and, for each mode, the ASR and fidelity of its images, so that every speed-up is paired with its quality
+cost. The modes are DDIM with 50, 25 and 10 steps; DPM-Solver++ (2M Karras, 12 steps); LCM-LoRA (4 steps, no
+classifier-free guidance); the same decoded by TAESD instead of the full VAE; fp16 vs fp32; and
+\texttt{torch.compile}. Two optimisations are built into the pipeline: the text embeddings of all labels
+(450k for the open-set target, 80 CLIP templates per class for closed sets) are computed once and cached, like a
+prompt prefix cache; and early rejection (Section~\ref{sec:method}) reduces the number of U-Net evaluations of
+search. The quantity that matters for an auditor is \emph{faithful attacks per GPU-hour}.

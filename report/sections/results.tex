@@ -1,0 +1,55 @@
+\section{Results}\label{sec:results}
+\subsection{BioCLIP on real photos}
+Table~\ref{tab:reference} gives the reference: BioCLIP's accuracy on unmodified photos of each real dataset.
+\todo{One sentence: e.g. high on inat80, lower on rare, as expected for held-out species.}
+\begin{table}[t]\centering\small
+\caption{BioCLIP (open set) on real photos.}\label{tab:reference}
+\resizebox{\columnwidth}{!}{\input{../results/tables/reference.tex}}
+\end{table}
+
+\subsection{Attack success}
+\begin{table*}[t]\centering\small
+\caption{Attack success per dataset and method (faithful = VLM judge; ASR with 95\% bootstrap CI).}\label{tab:main}
+\resizebox{\textwidth}{!}{\input{../results/tables/main.tex}}
+\end{table*}
+Table~\ref{tab:main} and Figure~\ref{fig:asr} compare all methods. \todo{Main findings: which family of modifiers
+works best (tables/families), how targeted and LLM prompts compare to templates, the gain of best-of-N, the effect of
+img2img strength (Figure~\ref{fig:i2i}), and how far in the tree the errors go (Figure~\ref{fig:taxo}).}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{../results/figures/asr_by_method.png}
+\caption{ASR (bars, 95\% CI) and faithful rate (dots) per method.}\label{fig:asr}
+\end{figure}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{../results/figures/img2img_strength.png}
+\caption{Editing real photos: ASR and fidelity against the img2img strength.}\label{fig:i2i}
+\end{figure}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{../results/figures/taxo_distance.png}
+\caption{Taxonomic distance of the errors (1 = same genus, 7 = another kingdom).}\label{fig:taxo}
+\end{figure}
+
+\subsection{Post-training}
+\todo{DDPO training curves (reward, train ASR, approx. KL) from checkpoints/ddpo/train_log.csv; RAFT vs DDPO vs
+best-of-N on split B; LPIPS diversity. The ablation without fidelity: reward hacking examples (figure) and its
+faithful rate.}
+
+\subsection{Transfer}
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{../results/figures/transfer_heatmap.png}
+\caption{ASR of the same images against other classifiers.}\label{fig:transfer}
+\end{figure}
+\todo{Do attacks transfer to BioCLIP-2 (the reward oracle, so a biased number), to generic CLIP and SigLIP?}
+
+\subsection{Speed and early rejection}
+\begin{table}[t]\centering\small
+\caption{Sampling modes: cost and quality.}\label{tab:speed}
+\resizebox{\columnwidth}{!}{\input{../results/tables/speed.tex}}
+\end{table}
+\todo{Table~\ref{tab:speed}: speed-up and quality loss per mode; faithful attacks per GPU-hour. Early rejection:
+Spearman correlation between preview and final reward (figures/early_correlation.png), ASR of bon vs bon\_early at
+their respective cost. VAE vs TAESD: PSNR and top-1 agreement (outputs/vae/vae\_fidelity.csv).}
+
+\subsection{Why BioCLIP fails}
+\todo{t-SNE (figures/tsne\_*.png), layer-wise drift of real vs attacked photos (figures/layer\_drift.png), saliency
+examples (figures/saliency\_*.png), confident errors and entropy.}

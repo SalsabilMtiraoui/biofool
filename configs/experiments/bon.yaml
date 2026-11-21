@@ -1,0 +1,4 @@
+base: ../default.yaml
+method: best_of_n
+best_of_n:
+  prune_at: null

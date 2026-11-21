@@ -1,0 +1,34 @@
+\section{Introduction}
+Foundation models for biology such as BioCLIP~\citep{stevens2024bioclip} classify images of organisms zero-shot at
+any rank of the taxonomy. They are integrated into citizen-science tools, camera-trap pipelines and the detection of
+invasive species, where a confident wrong name has a cost. Standard benchmarks measure accuracy on curated photos;
+they say little about the images such a tool meets in practice: unusual backgrounds, night flash, larvae instead of
+adults, partial views, or deliberately misleading pictures.
+
+We study this question with generative models. Our application produces \emph{semantic} adversarial examples: images
+that a person (and an independent model) recognises as species $y$, but on which BioCLIP outputs another species.
+Unlike pixel-level attacks~\citep{szegedy2014intriguing}, these images are plausible photographs; they are in the
+spirit of unrestricted~\citep{song2018constructing} and natural~\citep{hendrycks2021natural} adversarial examples.
+
+Our definition makes the problem well posed: an image only counts as an attack if an evaluation oracle that is
+independent of the training signal confirms the species (Section~\ref{sec:method}). Without this condition, a generator
+can trivially ``fool'' the classifier by drawing badly; an RL-trained generator learns exactly that (we show it).
+
+\textbf{Contributions.}
+(i) A pipeline that attacks the real, open-set BioCLIP with text-to-image and image-to-image generation, on four
+datasets.
+(ii) A post-training method: DDPO~\citep{black2024ddpo} with group-relative advantages~\citep{shao2024deepseekmath}
+and a two-oracle reward, which generalises to species unseen in training.
+(iii) An inference-time improvement, \emph{early rejection}, that prunes best-of-$N$ candidates from a cheap preview
+of the predicted clean image, and a study of sampling acceleration.
+(iv) An analysis of \emph{where} BioCLIP fails: per context family, per taxonomic rank, in its embedding space and in
+its saliency maps. Figure~\ref{fig:pipeline} summarises the approach.
+
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{\input{figures/pipeline.tex}}
+\caption{BioFool. A prompt (or a real photo) is turned into an image by Stable Diffusion with a LoRA. BioCLIP (the
+target) and BioCLIP-2 (the reward oracle) score it; the reward drives search and RL. Reported fidelity comes from a
+separate VLM judge and from humans.}
+\label{fig:pipeline}
+\end{figure}

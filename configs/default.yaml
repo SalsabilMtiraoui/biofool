@@ -1,0 +1,90 @@
+# Default configuration. Every experiment config starts with `base: ../default.yaml` and overrides a few keys.
+# Any key can also be overridden on the command line: python scripts/02_generate.py ... --set generator.steps=10
+seed: 0
+device: cuda
+species_csv: data/species.csv
+pairs_csv: data/confusable_pairs.csv
+cache_dir: .cache/biofool
+
+generator:
+  model_id: stable-diffusion-v1-5/stable-diffusion-v1-5
+  dtype: float16
+  resolution: 512
+  steps: 25
+  guidance_scale: 7.5
+  eta: 1.0                     # DDIM eta: 1.0 = stochastic (needed by DDPO and early rejection), 0.0 = deterministic
+  negative_prompt: "drawing, painting, illustration, cartoon, 3d render, text, watermark, blurry, deformed"
+  lora_path: null              # a LoRA produced by RAFT or DDPO
+  preview_vae: madebyollin/taesd   # tiny VAE used to preview x0 during early rejection
+  compile: false
+
+# Classifiers (see src/biofool/classifiers.py). kind: open_set | closed_set (default) | judge
+classifiers:
+  # THE tool we attack: BioCLIP exactly as in its public demo, open set over the ~450k TreeOfLife-10M species
+  bioclip_tol:  {kind: open_set, model_id: "hf-hub:imageomics/bioclip", tol_repo: imageomics/TreeOfLife-10M}
+  # closed set over the species of the run (80 for Synth/iNat, the 400 rare species for Rare-Species)
+  bioclip:      {model_id: "hf-hub:imageomics/bioclip",   label_format: taxonomic_common, preprocess: tol}
+  bioclip2:     {model_id: "hf-hub:imageomics/bioclip-2", label_format: taxonomic_common, preprocess: tol}
+  bioclip2_tol: {kind: open_set, model_id: "hf-hub:imageomics/bioclip-2", tol_repo: imageomics/TreeOfLife-200M}
+  openai_clip:  {model_id: "ViT-L-14/openai", label_format: common}
+  siglip:       {model_id: "ViT-SO400M-14-SigLIP/webli", label_format: common}
+  gpt4o_judge:  {kind: openai_judge, model_id: gpt-4o, detail: low, workers: 8}   # needs OPENAI_API_KEY
+  vlm_judge:    {kind: judge, model_id: Qwen/Qwen2.5-VL-7B-Instruct}             # local alternative, ~18 GB
+
+roles:
+  target: bioclip_tol          # the model we attack
+  closed_target: bioclip       # closed-set BioCLIP: nearest-species retrieval for targeted attacks, embeddings, saliency
+  reward_oracle: bioclip2      # fidelity term INSIDE the reward (training / best-of-N selection)
+  eval_oracle: gpt4o_judge     # fidelity used for the reported numbers: must differ from reward_oracle
+  transfer: [bioclip, bioclip2_tol, openai_clip, siglip]
+
+reward:
+  mode: gated                  # gated: fool * p_oracle(true) | hard: fool * [p_oracle(true) > tau] | margin
+  tau: 0.5
+  taxo_bonus: 0.0              # > 0 rewards errors that are far away in the tree of life
+  targeted: false
+
+fidelity:
+  threshold: 0.5               # an image is "faithful" if eval_oracle p(true species) >= threshold
+
+attack:
+  n_per_prompt: 4              # images per (species, prompt)
+  modifiers_per_species: 6
+
+best_of_n:
+  n: 8
+  prune_at: 0.4                # early rejection: fraction of the denoising steps after which candidates are pruned
+  keep: 2
+
+raft:
+  rounds: 1
+  select: top_per_species      # top_per_species | quantile
+  top_k: 4
+  min_fidelity: 0.5
+  lora_rank: 8
+  lr: 1.0e-4
+  steps: 1500
+  batch_size: 4
+
+ddpo:
+  epochs: 60
+  prompts_per_epoch: 8         # P
+  group_size: 4                # G images per prompt: advantages are normalised within each group (GRPO)
+  steps: 20                    # denoising steps while training
+  timestep_fraction: 0.5
+  train_batch_size: 2
+  lr: 3.0e-4
+  clip_range: 1.0e-4
+  adv_clip: 5.0
+  lora_rank: 8
+  max_grad_norm: 1.0
+  save_every: 10
+
+llm_attacker:
+  backend: openai              # openai (needs OPENAI_API_KEY) | local (a Hugging Face model on the GPU)
+  openai_model: gpt-4o-mini
+  model_id: Qwen/Qwen2.5-3B-Instruct
+  rounds: 4
+  proposals_per_round: 4
+  images_per_modifier: 2
+  keep: 6                      # best modifiers per species written to the output file

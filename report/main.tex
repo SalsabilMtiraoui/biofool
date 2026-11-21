@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{microtype,graphicx,subcaption,booktabs,hyperref,amsmath,amssymb,xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit}
+\usepackage[accepted]{icml2025}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\icmltitlerunning{BioFool: Fooling BioCLIP with Generated Images}
+
+\begin{document}
+\twocolumn[
+\icmltitle{BioFool: Semantic Adversarial Image Generation\\against a Tree-of-Life Foundation Model}
+\begin{icmlauthorlist}
+\icmlauthor{\todo{Author 1}}{uni}
+\icmlauthor{\todo{Author 2}}{uni}
+\icmlauthor{\todo{Author 3}}{uni}
+\end{icmlauthorlist}
+\icmlaffiliation{uni}{\todo{University}}
+\icmlcorrespondingauthor{\todo{Name}}{\todo{email}}
+\icmlkeywords{diffusion models, adversarial examples, reinforcement learning, BioCLIP}
+\vskip 0.3in
+]
+\printAffiliationsAndNotice{}
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/method}
+\input{sections/acceleration}
+\input{sections/setup}
+\input{sections/results}
+\input{sections/discussion}
+
+\bibliography{references}
+\bibliographystyle{icml2025}
+\end{document}

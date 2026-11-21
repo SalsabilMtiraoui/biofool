@@ -1,0 +1,22 @@
+source_latin,target_latin,reason
+Danaus plexippus,Limenitis archippus,Mullerian mimicry
+Limenitis archippus,Danaus plexippus,Mullerian mimicry
+Vanessa atalanta,Vanessa cardui,same genus
+Apis mellifera,Eristalis tenax,Batesian mimicry (drone fly mimics honey bee)
+Vespula vulgaris,Episyrphus balteatus,Batesian mimicry (hoverfly mimics wasp)
+Coccinella septempunctata,Harmonia axyridis,look-alike ladybirds
+Corvus corax,Corvus brachyrhynchos,same genus
+Turdus migratorius,Erithacus rubecula,shared common name 'robin'
+Parus major,Cyanistes caeruleus,look-alike tits
+Haliaeetus leucocephalus,Buteo jamaicensis,large raptors
+Tyto alba,Bubo virginianus,owls
+Echinacea purpurea,Rudbeckia hirta,look-alike coneflowers
+Bellis perennis,Leucanthemum vulgare,look-alike daisies
+Urtica dioica,Lamium album,dead-nettle mimics nettle leaves
+Hedera helix,Toxicodendron radicans,shared common name 'ivy'
+Convallaria majalis,Allium ursinum,toxic look-alike (real poisonings)
+Amanita phalloides,Agaricus campestris,toxic look-alike (real poisonings)
+Amanita muscaria,Amanita caesarea,same genus, red/orange cap
+Cantharellus cibarius,Hygrophoropsis aurantiaca,false chanterelle
+Morchella esculenta,Gyromitra esculenta,false morel (toxic)
+Boletus edulis,Rubroboletus satanas,toxic bolete

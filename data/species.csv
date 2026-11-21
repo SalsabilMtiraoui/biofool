@@ -1,0 +1,81 @@
+group,kingdom,phylum,class,order,family,genus,epithet,common_name,split
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Danaus,plexippus,monarch butterfly,A
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Limenitis,archippus,viceroy butterfly,A
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Vanessa,atalanta,red admiral,B
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Vanessa,cardui,painted lady,A
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Aglais,io,European peacock butterfly,A
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Papilionidae,Papilio,machaon,Old World swallowtail,B
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Pieridae,Pieris,rapae,small white butterfly,A
+insects,Animalia,Arthropoda,Insecta,Lepidoptera,Sphingidae,Manduca,sexta,tobacco hornworm,A
+insects,Animalia,Arthropoda,Insecta,Hymenoptera,Apidae,Apis,mellifera,western honey bee,B
+insects,Animalia,Arthropoda,Insecta,Hymenoptera,Apidae,Bombus,terrestris,buff-tailed bumblebee,A
+insects,Animalia,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespula,vulgaris,common wasp,A
+insects,Animalia,Arthropoda,Insecta,Diptera,Syrphidae,Eristalis,tenax,drone fly,B
+insects,Animalia,Arthropoda,Insecta,Diptera,Syrphidae,Episyrphus,balteatus,marmalade hoverfly,A
+insects,Animalia,Arthropoda,Insecta,Diptera,Muscidae,Musca,domestica,house fly,A
+insects,Animalia,Arthropoda,Insecta,Coleoptera,Coccinellidae,Coccinella,septempunctata,seven-spot ladybird,B
+insects,Animalia,Arthropoda,Insecta,Coleoptera,Coccinellidae,Harmonia,axyridis,Asian lady beetle,A
+insects,Animalia,Arthropoda,Insecta,Coleoptera,Lucanidae,Lucanus,cervus,European stag beetle,A
+insects,Animalia,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Popillia,japonica,Japanese beetle,B
+insects,Animalia,Arthropoda,Insecta,Mantodea,Mantidae,Mantis,religiosa,European mantis,A
+insects,Animalia,Arthropoda,Insecta,Odonata,Aeshnidae,Anax,imperator,emperor dragonfly,A
+birds,Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,corax,common raven,A
+birds,Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,brachyrhynchos,American crow,A
+birds,Animalia,Chordata,Aves,Passeriformes,Corvidae,Pica,pica,Eurasian magpie,B
+birds,Animalia,Chordata,Aves,Passeriformes,Corvidae,Cyanocitta,cristata,blue jay,A
+birds,Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus,migratorius,American robin,A
+birds,Animalia,Chordata,Aves,Passeriformes,Muscicapidae,Erithacus,rubecula,European robin,B
+birds,Animalia,Chordata,Aves,Passeriformes,Cardinalidae,Cardinalis,cardinalis,northern cardinal,A
+birds,Animalia,Chordata,Aves,Passeriformes,Passeridae,Passer,domesticus,house sparrow,A
+birds,Animalia,Chordata,Aves,Passeriformes,Paridae,Parus,major,great tit,B
+birds,Animalia,Chordata,Aves,Passeriformes,Paridae,Cyanistes,caeruleus,Eurasian blue tit,A
+birds,Animalia,Chordata,Aves,Passeriformes,Sturnidae,Sturnus,vulgaris,common starling,A
+birds,Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,rustica,barn swallow,B
+birds,Animalia,Chordata,Aves,Strigiformes,Strigidae,Bubo,virginianus,great horned owl,A
+birds,Animalia,Chordata,Aves,Strigiformes,Tytonidae,Tyto,alba,barn owl,A
+birds,Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Haliaeetus,leucocephalus,bald eagle,B
+birds,Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Buteo,jamaicensis,red-tailed hawk,A
+birds,Animalia,Chordata,Aves,Falconiformes,Falconidae,Falco,peregrinus,peregrine falcon,A
+birds,Animalia,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,herodias,great blue heron,B
+birds,Animalia,Chordata,Aves,Anseriformes,Anatidae,Anas,platyrhynchos,mallard,A
+birds,Animalia,Chordata,Aves,Phoenicopteriformes,Phoenicopteridae,Phoenicopterus,roseus,greater flamingo,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Helianthus,annuus,common sunflower,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Taraxacum,officinale,common dandelion,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Bellis,perennis,common daisy,B
+plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Leucanthemum,vulgare,oxeye daisy,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Echinacea,purpurea,purple coneflower,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Rudbeckia,hirta,black-eyed Susan,B
+plants,Plantae,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Papaver,rhoeas,common poppy,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Eschscholzia,californica,California poppy,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Lamiales,Plantaginaceae,Digitalis,purpurea,common foxglove,B
+plants,Plantae,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Lavandula,angustifolia,English lavender,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Trifolium,pratense,red clover,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Lupinus,polyphyllus,garden lupin,B
+plants,Plantae,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Rosa,canina,dog rose,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Rosales,Urticaceae,Urtica,dioica,stinging nettle,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Lamium,album,white dead-nettle,B
+plants,Plantae,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Hedera,helix,common ivy,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Toxicodendron,radicans,poison ivy,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Fagales,Fagaceae,Quercus,robur,pedunculate oak,B
+plants,Plantae,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Convallaria,majalis,lily of the valley,A
+plants,Plantae,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Allium,ursinum,wild garlic,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Amanitaceae,Amanita,muscaria,fly agaric,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Amanitaceae,Amanita,phalloides,death cap,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Amanitaceae,Amanita,caesarea,Caesar's mushroom,B
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Agaricus,campestris,field mushroom,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Agaricus,bisporus,button mushroom,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Macrolepiota,procera,parasol mushroom,B
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Coprinus,comatus,shaggy ink cap,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Pleurotaceae,Pleurotus,ostreatus,oyster mushroom,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Physalacriaceae,Armillaria,mellea,honey fungus,B
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Strophariaceae,Hypholoma,fasciculare,sulphur tuft,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Boletales,Boletaceae,Boletus,edulis,porcino,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Boletales,Boletaceae,Rubroboletus,satanas,Satan's bolete,B
+fungi,Fungi,Basidiomycota,Agaricomycetes,Cantharellales,Cantharellaceae,Cantharellus,cibarius,golden chanterelle,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Boletales,Hygrophoropsidaceae,Hygrophoropsis,aurantiaca,false chanterelle,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Polyporales,Fomitopsidaceae,Laetiporus,sulphureus,chicken of the woods,B
+fungi,Fungi,Basidiomycota,Agaricomycetes,Polyporales,Polyporaceae,Trametes,versicolor,turkey tail,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Polyporales,Polyporaceae,Fomes,fomentarius,tinder fungus,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Lycoperdaceae,Lycoperdon,perlatum,common puffball,B
+fungi,Fungi,Ascomycota,Pezizomycetes,Pezizales,Morchellaceae,Morchella,esculenta,yellow morel,A
+fungi,Fungi,Ascomycota,Pezizomycetes,Pezizales,Discinaceae,Gyromitra,esculenta,false morel,A

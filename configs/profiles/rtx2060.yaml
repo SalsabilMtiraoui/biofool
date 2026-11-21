@@ -1,0 +1,9 @@
+# RTX 2060 (6 GB, fp16): the T4 profile with smaller batches. Generation, scoring, analysis and img2img fit;
+# best-of-N, RAFT and DDPO keep the generator and two classifiers in memory at once: if they run out of memory,
+# run those steps on Colab (T4 profile).
+base: t4.yaml
+generator:
+  batch: 2
+classifiers_batch_size: 16
+ddpo:
+  prompts_per_epoch: 3

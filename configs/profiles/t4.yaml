@@ -1,0 +1,26 @@
+# Google Colab T4 (16 GB, fp16, sessions that can be cut): fewer images per step, same protocol.
+# Used with:  python run.py <step> --profile t4      (or BIOFOOL_PROFILE=t4)
+generator:
+  steps: 20
+  batch: 4
+attack:
+  n_per_prompt: 2
+  modifiers_per_species: 4
+best_of_n:
+  n: 6
+  keep: 2
+raft:
+  steps: 800
+  batch_size: 2
+  gradient_checkpointing: true
+ddpo:
+  epochs: 30
+  prompts_per_epoch: 4
+  group_size: 4
+  steps: 16
+  train_batch_size: 1
+  gradient_checkpointing: true
+  save_every: 5
+llm_attacker:
+  rounds: 3
+  proposals_per_round: 3

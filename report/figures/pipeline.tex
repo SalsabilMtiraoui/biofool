@@ -1,0 +1,21 @@
+% Summary figure of the report. \usepackage{tikz} \usetikzlibrary{positioning,arrows.meta,fit}
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners, align=center, font=\small, minimum height=8mm, inner sep=4pt},
+  gen/.style={box, fill=blue!10}, clf/.style={box, fill=orange!15}, opt/.style={box, fill=green!12},
+  arr/.style={-{Latex[length=2mm]}, thick}]
+  \node[box] (sp) {species $y$\\(80, 4 groups)};
+  \node[box, right=6mm of sp] (pr) {prompt builder\\modifiers / targeted / LLM};
+  \node[gen, right=6mm of pr] (sd) {Stable Diffusion 1.5\\+ LoRA $\phi$};
+  \node[clf, above right=4mm and 10mm of sd] (t) {BioCLIP (target)\\$p_T(y)$};
+  \node[clf, right=10mm of sd] (o) {BioCLIP-2 (reward oracle)\\$p_O(y)$};
+  \node[clf, below right=4mm and 10mm of sd, fill=gray!15] (e) {VLM judge + humans\\(evaluation only)};
+  \node[opt, below=14mm of pr, minimum width=60mm] (r) {$r=(1-p_T(y))\,p_O(y)$ \quad best-of-$N$ / early rejection / RAFT / DDPO (GRPO)};
+  \draw[arr] (sp) -- (pr);
+  \draw[arr] (pr) -- (sd);
+  \draw[arr] (sd) -- (t);
+  \draw[arr] (sd) -- (o);
+  \draw[arr, dashed] (sd) -- (e);
+  \draw[arr] (t.east) -| ++(4mm,-30mm) |- (r.east);
+  \draw[arr] (o.east) -| ++(2mm,-14mm) |- (r.east);
+  \draw[arr] (r.north) -- node[right, font=\scriptsize]{update $\phi$ / select} (sd.south);
+\end{tikzpicture}

@@ -1,0 +1,21 @@
+# Tested with: torch 2.15, diffusers 0.43, transformers 5.24, peft 0.22, open_clip_torch 4.2 (Python 3.11-3.13)
+torch>=2.3
+diffusers>=0.32
+transformers>=4.56
+accelerate>=1.0
+peft>=0.14
+open_clip_torch>=2.29
+pandas>=2.2
+numpy
+pyyaml
+matplotlib
+tabulate
+scikit-learn
+openai>=1.40         # GPT-4o judge and LLM attacker (OPENAI_API_KEY)
+huggingface_hub
+pillow
+# optional: human evaluation app, diversity metric
+gradio
+lpips
+# tests
+pytest
