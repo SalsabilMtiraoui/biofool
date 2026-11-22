@@ -93,6 +93,7 @@ def propose(chat, s, history, k, rng):
 
 def main():
     args, cfg, species = parse(__doc__, add_args)
+    partial = Path(args.out).with_suffix(".partial.json")
     if Path(args.out).exists():
         print(f"{args.out} exists: skipping (delete it to run again)")
         return
@@ -101,7 +102,13 @@ def main():
     chat = OpenAIChat(c.openai_model) if c.get("backend", "local") == "openai" else LocalChat(c.model_id, cfg.device)
     gen, scorer = Generator(cfg), Scorer(cfg, species)
     best, log = {}, []
+    if partial.exists():  # resume after an interruption: species already searched are kept
+        state = json.loads(partial.read_text())
+        best, log = state["best"], state["log"]
+        print(f"resuming: {len(best)} species already done")
     for s in select_species(species, args.split, args.groups, args.limit):
+        if s.latin in best:
+            continue
         history = {}
         for rnd in range(c.rounds):
             mods = propose(chat, s, history, c.proposals_per_round, rng)
@@ -112,9 +119,12 @@ def main():
                 log.append(dict(latin=s.latin, round=rnd, modifier=m, reward=history[m]))
             print(f"{s.latin:28s} round {rnd}: best {max(history.values(), default=0):.3f}")
         best[s.latin] = [m for m, _ in sorted(history.items(), key=lambda x: -x[1])[:c.keep]]
+        partial.parent.mkdir(parents=True, exist_ok=True)
+        partial.write_text(json.dumps({"best": best, "log": log}))  # saved after every species
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(best, indent=2))
     Path(args.out).with_suffix(".log.json").write_text(json.dumps(log, indent=2))
+    partial.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

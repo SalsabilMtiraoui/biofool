@@ -16,7 +16,7 @@ insects,Animalia,Arthropoda,Insecta,Diptera,Muscidae,Musca,domestica,house fly,A
 insects,Animalia,Arthropoda,Insecta,Coleoptera,Coccinellidae,Coccinella,septempunctata,seven-spot ladybird,B
 insects,Animalia,Arthropoda,Insecta,Coleoptera,Coccinellidae,Harmonia,axyridis,Asian lady beetle,A
 insects,Animalia,Arthropoda,Insecta,Coleoptera,Lucanidae,Lucanus,cervus,European stag beetle,A
-insects,Animalia,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Popillia,japonica,Japanese beetle,B
+insects,Animalia,Arthropoda,Insecta,Coleoptera,Rutelidae,Popillia,japonica,Japanese beetle,B
 insects,Animalia,Arthropoda,Insecta,Mantodea,Mantidae,Mantis,religiosa,European mantis,A
 insects,Animalia,Arthropoda,Insecta,Odonata,Aeshnidae,Anax,imperator,emperor dragonfly,A
 birds,Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,corax,common raven,A
@@ -47,7 +47,7 @@ plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Echinacea,purpure
 plants,Plantae,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Rudbeckia,hirta,black-eyed Susan,B
 plants,Plantae,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Papaver,rhoeas,common poppy,A
 plants,Plantae,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Eschscholzia,californica,California poppy,A
-plants,Plantae,Tracheophyta,Magnoliopsida,Lamiales,Plantaginaceae,Digitalis,purpurea,common foxglove,B
+plants,Animalia,Arthropoda,Insecta,Hemiptera,Cicadellidae,Digitalis,purpurea,common foxglove,B
 plants,Plantae,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Lavandula,angustifolia,English lavender,A
 plants,Plantae,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Trifolium,pratense,red clover,A
 plants,Plantae,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Lupinus,polyphyllus,garden lupin,B
@@ -57,8 +57,8 @@ plants,Plantae,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Lamium,album,white 
 plants,Plantae,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Hedera,helix,common ivy,A
 plants,Plantae,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Toxicodendron,radicans,poison ivy,A
 plants,Plantae,Tracheophyta,Magnoliopsida,Fagales,Fagaceae,Quercus,robur,pedunculate oak,B
-plants,Plantae,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Convallaria,majalis,lily of the valley,A
-plants,Plantae,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Allium,ursinum,wild garlic,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asparagales,Asparagaceae,Convallaria,majalis,lily of the valley,A
+plants,Plantae,Tracheophyta,Magnoliopsida,Asparagales,Amaryllidaceae,Allium,ursinum,wild garlic,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Amanitaceae,Amanita,muscaria,fly agaric,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Amanitaceae,Amanita,phalloides,death cap,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Amanitaceae,Amanita,caesarea,Caesar's mushroom,B
@@ -68,7 +68,7 @@ fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Macrolepiota,pro
 fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Coprinus,comatus,shaggy ink cap,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Pleurotaceae,Pleurotus,ostreatus,oyster mushroom,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Physalacriaceae,Armillaria,mellea,honey fungus,B
-fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Strophariaceae,Hypholoma,fasciculare,sulphur tuft,A
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Hymenogastraceae,Hypholoma,fasciculare,sulphur tuft,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Boletales,Boletaceae,Boletus,edulis,porcino,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Boletales,Boletaceae,Rubroboletus,satanas,Satan's bolete,B
 fungi,Fungi,Basidiomycota,Agaricomycetes,Cantharellales,Cantharellaceae,Cantharellus,cibarius,golden chanterelle,A
@@ -76,6 +76,6 @@ fungi,Fungi,Basidiomycota,Agaricomycetes,Boletales,Hygrophoropsidaceae,Hygrophor
 fungi,Fungi,Basidiomycota,Agaricomycetes,Polyporales,Fomitopsidaceae,Laetiporus,sulphureus,chicken of the woods,B
 fungi,Fungi,Basidiomycota,Agaricomycetes,Polyporales,Polyporaceae,Trametes,versicolor,turkey tail,A
 fungi,Fungi,Basidiomycota,Agaricomycetes,Polyporales,Polyporaceae,Fomes,fomentarius,tinder fungus,A
-fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Lycoperdaceae,Lycoperdon,perlatum,common puffball,B
+fungi,Fungi,Basidiomycota,Agaricomycetes,Agaricales,Agaricaceae,Lycoperdon,perlatum,common puffball,B
 fungi,Fungi,Ascomycota,Pezizomycetes,Pezizales,Morchellaceae,Morchella,esculenta,yellow morel,A
 fungi,Fungi,Ascomycota,Pezizomycetes,Pezizales,Discinaceae,Gyromitra,esculenta,false morel,A

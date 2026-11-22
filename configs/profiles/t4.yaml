@@ -20,7 +20,7 @@ ddpo:
   steps: 16
   train_batch_size: 1
   gradient_checkpointing: true
-  save_every: 5
+  save_every: 2
 llm_attacker:
   rounds: 3
   proposals_per_round: 3

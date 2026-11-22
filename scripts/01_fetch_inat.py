@@ -11,6 +11,7 @@ Two datasets are built with this script:
 The photos give BioCLIP's accuracy on real data (the reference) and are the starting images of img2img attacks.
 """
 
+import http.client
 import io
 import json
 import sys
@@ -24,8 +25,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from PIL import Image  # noqa: E402
 
 from biofool.cli import parse  # noqa: E402
-from biofool.io import RunWriter, begin_run, finish_run  # noqa: E402
-from biofool.taxonomy import Species  # noqa: E402
+from biofool.io import RunWriter, finish_run, read_meta  # noqa: E402
+from biofool.taxonomy import Species, load_species  # noqa: E402
 
 API = "https://api.inaturalist.org/v1"
 HEADERS = {"User-Agent": "biofool-course-project"}
@@ -50,7 +51,7 @@ def get(url, raw=False):
                 data = r.read()
             time.sleep(1.0)  # iNaturalist asks for at most ~1 request per second
             return data if raw else json.loads(data)
-        except OSError:
+        except (OSError, http.client.HTTPException):  # includes IncompleteRead: retry
             time.sleep(2 ** attempt)
     raise RuntimeError(url)
 
@@ -74,9 +75,17 @@ def resolve(binomial: str, idx: int):
 
 def main():
     args, cfg, species = parse(__doc__, add_args)
-    if not begin_run(args.out):
+    out = Path(args.out)
+    if (out / "DONE").exists():
+        print(f"{out} is complete: skipping (delete {out / 'DONE'} to run it again)")
         return
-    if args.species_list:
+    done = {}
+    if (out / "meta.jsonl").exists():  # resume: keep the photos already downloaded, never download one twice
+        for m in read_meta(out):
+            done.setdefault(m["latin"], set()).add(m["source"])
+    if (out / "species.csv").exists():
+        species = load_species(out / "species.csv")
+    elif args.species_list:
         names = [l.strip() for l in open(args.species_list) if l.strip() and not l.startswith("#")]
         species = []
         for name in names:
@@ -86,12 +95,15 @@ def main():
                 species.append(s)
     writer = RunWriter(args.out, species)
     for s in species:
+        have = done.get(s.latin, set())
+        if len(have) >= args.per_species:
+            continue
         q = urllib.parse.urlencode(dict(taxon_name=s.latin, quality_grade="research", photos="true",
                                         photo_license="cc0,cc-by,cc-by-nc", per_page=args.per_species * 2,
                                         order_by="votes"))
-        n = 0
         for obs in get(f"{API}/observations?{q}")["results"]:
-            if n >= args.per_species or not obs.get("photos"):
+            source = f"https://www.inaturalist.org/observations/{obs['id']}"
+            if len(have) >= args.per_species or not obs.get("photos") or source in have:
                 continue
             url = obs["photos"][0]["url"].replace("square", "medium")
             try:
@@ -100,12 +112,13 @@ def main():
                 continue
             writer.add(im, species_idx=s.idx, latin=s.latin, group=s.group, split=s.split, dataset=args.dataset,
                        family="real", modifier="", prompt="", target_idx=None, seed=None, method="real",
-                       source=f"https://www.inaturalist.org/observations/{obs['id']}",
-                       license=obs["photos"][0].get("license_code"))
-            n += 1
-        print(f"{s.latin:28s} {n} photos")
+                       source=source, license=obs["photos"][0].get("license_code"))
+            have.add(source)
+        print(f"{s.latin:28s} {len(have)} photos")
     writer.close()
-    finish_run(args.out)
+    if writer.n == 0:
+        sys.exit("no photo downloaded: check the internet connection (api.inaturalist.org)")
+    finish_run(out)
 
 
 if __name__ == "__main__":

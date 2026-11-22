@@ -1,0 +1,9 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Popillia japonica              family: Scarabaeidae -> Rutelidae
+Digitalis purpurea             kingdom: Plantae -> Animalia; phylum: Tracheophyta -> Arthropoda; class: Magnoliopsida -> Insecta; order: Lamiales -> Hemiptera; family: Plantaginaceae -> Cicadellidae
+Convallaria majalis            class: Liliopsida -> Magnoliopsida
+Allium ursinum                 class: Liliopsida -> Magnoliopsida
+Hypholoma fasciculare          family: Strophariaceae -> Hymenogastraceae
+Lycoperdon perlatum            family: Lycoperdaceae -> Agaricaceae
+6 species with differences
+rewrote data/species.csv

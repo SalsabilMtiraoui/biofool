@@ -1,0 +1,102 @@
+W1122 03:12:15.410000 32736 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+C:\Users\salsa\Downloads\biofool\biofool\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
+Loading pipeline components...:  33%|███▎      | 2/6 [00:04<00:09,  2.35s/it]
+Loading pipeline components...:  50%|█████     | 3/6 [00:05<00:04,  1.59s/it]
+
+Loading weights:   0%|          | 0/196 [00:00<?, ?it/s][A
+
+Loading weights:  23%|██▎       | 46/196 [00:00<00:00, 456.25it/s][A
+
+Loading weights:  47%|████▋     | 92/196 [00:00<00:00, 404.31it/s][A
+
+Loading weights:  68%|██████▊   | 133/196 [00:00<00:00, 388.30it/s][A
+
+Loading weights:  89%|████████▉ | 174/196 [00:00<00:00, 392.86it/s][A
+Loading weights: 100%|██████████| 196/196 [00:00<00:00, 397.88it/s]
+
+Loading pipeline components...:  67%|██████▋   | 4/6 [00:06<00:02,  1.36s/it]
+Loading pipeline components...: 100%|██████████| 6/6 [00:06<00:00,  1.04s/it]
+baseline: 80 prompts, synth80 -> outputs/baseline
+2/160 images (3.72 s/image)
+4/160 images (3.43 s/image)
+6/160 images (3.47 s/image)
+8/160 images (3.52 s/image)
+10/160 images (3.53 s/image)
+12/160 images (3.57 s/image)
+14/160 images (3.59 s/image)
+16/160 images (3.62 s/image)
+18/160 images (3.65 s/image)
+20/160 images (3.68 s/image)
+22/160 images (3.74 s/image)
+24/160 images (3.76 s/image)
+26/160 images (3.80 s/image)
+28/160 images (4.36 s/image)
+30/160 images (4.62 s/image)
+32/160 images (4.62 s/image)
+34/160 images (4.61 s/image)
+36/160 images (4.61 s/image)
+38/160 images (4.61 s/image)
+40/160 images (4.62 s/image)
+42/160 images (4.61 s/image)
+44/160 images (4.61 s/image)
+46/160 images (5.86 s/image)
+48/160 images (5.42 s/image)
+50/160 images (5.95 s/image)
+52/160 images (6.56 s/image)
+54/160 images (6.54 s/image)
+56/160 images (6.58 s/image)
+58/160 images (6.91 s/image)
+60/160 images (7.06 s/image)
+62/160 images (7.20 s/image)
+64/160 images (7.81 s/image)
+66/160 images (8.49 s/image)
+68/160 images (8.29 s/image)
+70/160 images (8.23 s/image)
+72/160 images (8.72 s/image)
+74/160 images (8.93 s/image)
+76/160 images (8.93 s/image)
+78/160 images (9.10 s/image)
+80/160 images (9.61 s/image)
+82/160 images (8.78 s/image)
+84/160 images (9.97 s/image)
+86/160 images (9.92 s/image)
+88/160 images (10.66 s/image)
+90/160 images (8.94 s/image)
+92/160 images (10.79 s/image)
+94/160 images (11.64 s/image)
+96/160 images (11.73 s/image)
+98/160 images (11.77 s/image)
+100/160 images (11.68 s/image)
+102/160 images (12.50 s/image)
+104/160 images (11.68 s/image)
+106/160 images (12.49 s/image)
+108/160 images (12.97 s/image)
+110/160 images (12.04 s/image)
+112/160 images (12.15 s/image)
+114/160 images (12.26 s/image)
+116/160 images (13.43 s/image)
+118/160 images (12.23 s/image)
+120/160 images (13.44 s/image)
+122/160 images (13.71 s/image)
+124/160 images (12.90 s/image)
+126/160 images (12.79 s/image)
+128/160 images (14.09 s/image)
+130/160 images (12.64 s/image)
+132/160 images (13.86 s/image)
+134/160 images (13.81 s/image)
+136/160 images (14.05 s/image)
+138/160 images (14.28 s/image)
+140/160 images (13.61 s/image)
+142/160 images (13.25 s/image)
+144/160 images (15.42 s/image)
+146/160 images (14.35 s/image)
+148/160 images (15.41 s/image)
+150/160 images (14.17 s/image)
+152/160 images (13.68 s/image)
+154/160 images (13.90 s/image)
+156/160 images (14.06 s/image)
+158/160 images (13.55 s/image)
+160/160 images (13.00 s/image)

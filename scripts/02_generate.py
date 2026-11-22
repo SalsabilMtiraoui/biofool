@@ -9,6 +9,8 @@ Text-to-image (dataset synth80, the 80 species of data/species.csv):
 Image-to-image on REAL photos (datasets inat80 and rare; --source = a run written by 01_fetch_*.py):
   img2img      SDEdit: each photo is noised up to `strength` and re-generated with an attack modifier
   img2img_bon  the same with best-of-N (+ early rejection if best_of_n.prune_at is set)
+Resumable image by image: if the run is interrupted (Ctrl+C, Colab disconnection, crash), run the same command
+again and it continues after the last saved image (best-of-N: after the last complete prompt).
 Add --set generator.lora_path=<dir> to sample from a RAFT / DDPO LoRA, and --tag to name the run's method.
 
 Examples:
@@ -27,7 +29,7 @@ from PIL import Image  # noqa: E402
 
 from biofool.cli import parse, select_species  # noqa: E402
 from biofool.generator import Generator  # noqa: E402
-from biofool.io import RunWriter, begin_run, finish_run, read_meta, run_species  # noqa: E402
+from biofool.io import RunWriter, finish_run, read_meta, run_species  # noqa: E402
 from biofool.prompts import attack_prompts, baseline_prompt, targeted_prompts  # noqa: E402
 from biofool.taxonomy import load_pairs  # noqa: E402
 
@@ -75,8 +77,11 @@ def text_to_image_jobs(method, args, cfg, species, rng):
 
 def main():
     args, cfg, species = parse(__doc__, add_args)
-    if not begin_run(args.out):
+    out_dir = Path(args.out)
+    if (out_dir / "DONE").exists():
+        print(f"{out_dir} is complete: skipping (delete {out_dir / 'DONE'} to run it again)")
         return
+    previous = read_meta(out_dir) if (out_dir / "meta.jsonl").exists() else []
     args.batch = args.batch or cfg.generator.get("batch", 8)
     method = args.method or cfg.get("method", "baseline")
     tag = args.tag or method
@@ -105,6 +110,22 @@ def main():
     else:
         jobs = [(*j, None, 1.0) for j in text_to_image_jobs(method, args, cfg, species, rng)]
         dataset = "synth80"
+    # ---- resume: the job list is deterministic (same seed), so we skip what is already on disk
+    search = method in ("best_of_n", "img2img_bon")
+    if previous and search:
+        expected = cfg.best_of_n.keep if cfg.best_of_n.prune_at else cfg.best_of_n.n
+        counts = {}
+        for m in previous:
+            counts[m["job"]] = counts.get(m["job"], 0) + 1
+        complete = [m for m in previous if counts[m["job"]] == expected]  # drop a half-written last prompt
+        with open(out_dir / "meta.jsonl", "w") as f:
+            f.writelines(json.dumps(m) + "\n" for m in complete)
+        done_jobs = {m["job"] for m in complete}
+    else:
+        done_jobs = set()
+    if previous:
+        print(f"resuming {out_dir}: {len(done_jobs) if search else len(previous)} "
+              f"{'prompts' if search else 'images'} already done")
     gen = Generator(cfg)
     writer = RunWriter(args.out, species)
     (Path(args.out) / "config.json").write_text(json.dumps(cfg, indent=2))
@@ -125,12 +146,14 @@ def main():
         scorer = Scorer(cfg, species)
         b = cfg.best_of_n
         for j, (s, fam, mod, prompt, tgt, m, st) in enumerate(jobs):
-            seeds = [rng.randrange(2**31) for _ in range(b.n)]
+            seeds = [rng.randrange(2**31) for _ in range(b.n)]  # drawn even when skipped: keeps the seeds identical
+            if j in done_jobs:
+                continue
             records, out = best_of_n(gen, scorer, prompt, s.idx, seeds, tgt, prune_at=b.prune_at,
                                      keep=b.keep if b.prune_at else b.n, init_image=load_source(m), strength=st)
             best = max(range(len(records)), key=lambda i: records[i]["reward"])
             for i, (rec, im) in enumerate(zip(records, out.images)):
-                writer.add(im, **meta(s, fam, mod, prompt, tgt, m, st), seed=rec["seed"], is_best=i == best,
+                writer.add(im, **meta(s, fam, mod, prompt, tgt, m, st), job=j, seed=rec["seed"], is_best=i == best,
                            bon_n=b.n, prune_at=b.prune_at, unet_evals_per_prompt=out.unet_evals,
                            seconds_per_prompt=out.seconds, search_reward=rec["reward"],
                            early_reward=rec["early_reward"])
@@ -141,7 +164,7 @@ def main():
         flat = [(job, rng.randrange(2**31)) for job in jobs for _ in range(n if not method.startswith("img2img") else 1)]
         # img2img: one sample per (photo, modifier, strength); batches must share the strength
         flat.sort(key=lambda x: x[0][6])
-        i = 0
+        i = len(previous)  # images are written in this exact order: continue after the last one
         while i < len(flat):
             st = flat[i][0][6]
             chunk = [x for x in flat[i:i + args.batch] if x[0][6] == st]

@@ -1,0 +1,61 @@
+W1122 02:35:27.065000 22724 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+C:\Users\salsa\Downloads\biofool\biofool\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
+Loading pipeline components...:  17%|█▋        | 1/6 [00:04<00:23,  4.69s/it]
+
+Loading weights:   0%|          | 0/196 [00:00<?, ?it/s][A
+
+Loading weights:  26%|██▌       | 51/196 [00:00<00:00, 482.33it/s][A
+
+Loading weights:  51%|█████     | 100/196 [00:00<00:00, 397.13it/s][A
+
+Loading weights:  72%|███████▏  | 141/196 [00:00<00:00, 371.10it/s][A
+
+Loading weights:  91%|█████████▏| 179/196 [00:00<00:00, 364.06it/s][A
+Loading weights: 100%|██████████| 196/196 [00:00<00:00, 381.17it/s]
+
+Loading pipeline components...:  50%|█████     | 3/6 [00:05<00:04,  1.61s/it]
+Loading pipeline components...:  67%|██████▋   | 4/6 [00:06<00:02,  1.23s/it]
+Loading pipeline components...: 100%|██████████| 6/6 [00:06<00:00,  1.55it/s]
+Loading pipeline components...: 100%|██████████| 6/6 [00:06<00:00,  1.06s/it]
+templates: 4 prompts, synth80 -> outputs/smoke
+2/8 images (2.24 s/image)
+4/8 images (1.88 s/image)
+6/8 images (1.90 s/image)
+8/8 images (1.90 s/image)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C:\Users\salsa\Downloads\biofool\biofool\.venv\Lib\site-packages\open_clip\factory.py:555: UserWarning: QuickGELU mismatch between final model config (quick_gelu=False) and pretrained tag 'openai' (quick_gelu=True).
+  warnings.warn(
+bioclip_tol  outputs/smoke: done
+bioclip2     outputs/smoke: done
+gpt4o_judge  outputs/smoke: done
+gpt4o_judge: 8 API calls (the others came from the cache)
+bioclip      outputs/smoke: done
+bioclip2_tol outputs/smoke: done
+openai_clip  outputs/smoke: done
+siglip       outputs/smoke: done
+wrote outputs\smoke\scores.csv (8 images)
+
+== main
+| dataset   | method    |   n |   faithful_rate |   ASR |   ASR_lo |   ASR_hi |   effective_ASR |   effective_ASR_lo |   effective_ASR_hi |   ASR@family |   taxo_dist |
+|:----------|:----------|----:|----------------:|------:|---------:|---------:|----------------:|-------------------:|-------------------:|-------------:|------------:|
+| synth80   | templates |   8 |               1 |   0.5 |        0 |        1 |             0.5 |                  0 |                  1 |            0 |        1.75 |
+
+== by_group
+| method    | group   |   n |   faithful_rate |   ASR |   effective_ASR |   ASR@family |   taxo_dist |
+|:----------|:--------|----:|----------------:|------:|----------------:|-------------:|------------:|
+| templates | insects |   8 |               1 |   0.5 |             0.5 |            0 |        1.75 |
+
+== families
+| family     |   n |   faithful_rate |   ASR |   effective_ASR |   ASR@family |   taxo_dist |
+|:-----------|----:|----------------:|------:|----------------:|-------------:|------------:|
+| style      |   2 |               1 |   1   |             1   |            0 |         1.5 |
+| life_stage |   4 |               1 |   0.5 |             0.5 |            0 |         2   |
+| viewpoint  |   2 |               1 |   0   |             0   |            0 |       nan   |
+
+== transfer
+| method    |   bioclip |   bioclip2_tol |   bioclip_tol |   openai_clip |   siglip |
+|:----------|----------:|---------------:|--------------:|--------------:|---------:|
+| templates |     0.375 |          0.375 |           0.5 |         0.375 |    0.125 |

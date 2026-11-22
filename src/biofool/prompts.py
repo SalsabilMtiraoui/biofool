@@ -30,6 +30,8 @@ LIFE_STAGE: dict[str, list[str]] = {
     "fungi": ["young button stage", "old and decaying", "sliced in half", "growing in a large cluster"],
 }
 
+LIFE_STAGE_OTHER = ["juvenile", "very young individual", "old individual", "dead specimen in a museum collection"]
+
 TARGETED = [
     "in the typical habitat of the {target_common}",
     "photographed in the same style as typical photos of the {target_common}",
@@ -44,7 +46,7 @@ def baseline_prompt(s: Species) -> str:
 def all_modifiers(s: Species) -> list[tuple[str, str]]:
     """(family, modifier) pairs available for species s."""
     out = [(fam, m) for fam, mods in MODIFIERS.items() for m in mods]
-    out += [("life_stage", m) for m in LIFE_STAGE[s.group]]
+    out += [("life_stage", m) for m in LIFE_STAGE.get(s.group, LIFE_STAGE_OTHER)]
     return out
 
 

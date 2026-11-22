@@ -1,0 +1,46 @@
+W1122 01:32:30.050000 18876 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+C:\Users\salsa\Downloads\biofool\biofool\.venv\Lib\site-packages\diffusers\utils\deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+torch 2.11.0+cu128, CUDA available: True
+GPU: NVIDIA GeForce RTX 2060, 6 GiB
+80 species, groups: ['birds', 'fungi', 'insects', 'plants']
+
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]
+Fetching 14 files:  14%|█▍        | 2/14 [00:00<00:02,  5.16it/s]
+Fetching 14 files:  36%|███▌      | 5/14 [00:00<00:00, 11.21it/s]
+Fetching 14 files:  64%|██████▍   | 9/14 [00:00<00:00, 12.18it/s]
+Fetching 14 files:  79%|███████▊  | 11/14 [00:00<00:00, 13.12it/s]
+Fetching 14 files:  79%|███████▊  | 11/14 [00:19<00:00, 13.12it/s]
+Fetching 14 files:  86%|████████▌ | 12/14 [22:14<07:34, 227.28s/it]
+Fetching 14 files:  93%|█████████▎| 13/14 [23:42<03:19, 199.95s/it]
+Fetching 14 files: 100%|██████████| 14/14 [27:35<00:00, 207.22s/it]
+Fetching 14 files: 100%|██████████| 14/14 [27:35<00:00, 118.24s/it]
+
+Loading pipeline components...:   0%|          | 0/6 [00:00<?, ?it/s]
+
+Loading weights:   0%|          | 0/196 [00:00<?, ?it/s][A
+
+Loading weights:  27%|██▋       | 53/196 [00:00<00:00, 520.74it/s][A
+
+Loading weights:  54%|█████▍    | 106/196 [00:00<00:00, 519.63it/s][A
+
+Loading weights:  83%|████████▎ | 162/196 [00:00<00:00, 533.75it/s][A
+Loading weights: 100%|██████████| 196/196 [00:00<00:00, 527.04it/s]
+
+Loading pipeline components...:  17%|█▋        | 1/6 [00:00<00:04,  1.20it/s]
+Loading pipeline components...:  50%|█████     | 3/6 [00:01<00:01,  2.95it/s]
+Loading pipeline components...:  83%|████████▎ | 5/6 [00:01<00:00,  5.09it/s]
+Loading pipeline components...: 100%|██████████| 6/6 [00:04<00:00,  1.13s/it]
+Loading pipeline components...: 100%|██████████| 6/6 [00:04<00:00,  1.21it/s]
+C:\Users\salsa\Downloads\biofool\biofool\.venv\Lib\site-packages\open_clip\factory.py:555: UserWarning: QuickGELU mismatch between final model config (quick_gelu=False) and pretrained tag 'openai' (quick_gelu=True).
+  warnings.warn(
+generated outputs/check_setup.png in 4.5s
+bioclip_tol  top-1 Danaus plexippus             p=0.998   p(true)=0.998   shared ranks=7
+bioclip      top-1 Danaus plexippus             p=0.997   p(true)=0.997   shared ranks=7
+bioclip2     top-1 Danaus plexippus             p=1.000   p(true)=1.000   shared ranks=7
+bioclip2_tol top-1 Danaus plexippus             p=0.937   p(true)=0.937   shared ranks=7
+openai_clip  top-1 Danaus plexippus             p=0.765   p(true)=0.765   shared ranks=7
+siglip       top-1 Danaus plexippus             p=0.597   p(true)=0.597   shared ranks=7
+gpt4o_judge  p(yes) = 1.000
+setup OK

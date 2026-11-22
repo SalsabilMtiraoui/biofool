@@ -42,7 +42,7 @@ def main():
     names = args.classifiers or list(dict.fromkeys([r.target, r.reward_oracle, r.eval_oracle, *r.transfer]))
     runs = {}
     for run in args.runs:
-        if not (Path(run) / "meta.jsonl").exists():
+        if not (Path(run) / "meta.jsonl").exists() or (Path(run) / "meta.jsonl").stat().st_size == 0:
             print(f"{run}: no images, skipped")
             continue
         meta = pd.DataFrame(read_meta(run))

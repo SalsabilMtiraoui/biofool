@@ -125,7 +125,8 @@ GROUPS["all"] = ["check", "taxonomy"] + GROUPS["data"] + GROUPS["attacks"] + GRO
 
 
 def dynamic(kind):
-    runs = [r for r in RUNS if Path(r, "DONE").exists()]
+    runs = [r for r in RUNS if Path(r, "DONE").exists() and Path(r, "meta.jsonl").exists()
+            and Path(r, "meta.jsonl").stat().st_size > 0]
     if kind == "SCORE":
         return [(["scripts/03_score.py", "--runs", *runs], [])]
     if kind == "ANALYZE":
