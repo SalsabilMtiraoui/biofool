@@ -49,7 +49,7 @@ def main():
         old = Path(run) / "scores.csv"
         df = meta
         if old.exists() and not args.force:
-            prev = pd.read_csv(old, dtype={"image_id": str})
+            prev = pd.read_csv(old, dtype={"image_id": str, "source_image_id": str})
             if len(prev) == len(meta):
                 df = prev
         runs[run] = (df, run_species(run, cfg.species_csv))

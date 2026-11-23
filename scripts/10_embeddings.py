@@ -116,7 +116,8 @@ def main():
         pairs = pairs.sample(min(len(pairs), args.max_pairs), random_state=cfg.seed)
         sims = []
         for row in pairs.itertuples():
-            a = cls_per_layer(clf, load(row.source_run, [row.source_image_id]) + load(row.run_dir, [row.image_id]))
+            src_id = str(row.source_image_id).split(".")[0].zfill(6)
+            a = cls_per_layer(clf, load(row.source_run, [src_id]) + load(row.run_dir, [row.image_id]))
             sims.append((a[0] * a[1]).sum(-1).numpy())
         sims = np.stack(sims)
         fig, ax = plt.subplots(figsize=(6, 3.5))
